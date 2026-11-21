@@ -21,8 +21,14 @@ const shotsDir = join(repoRoot, 'screenshots');
 if (!existsSync(gameDir)) fail(`game/ not found in ${repoRoot}`);
 if (!existsSync(shotsDir)) fail(`screenshots/ not found in ${repoRoot}`);
 
-rmSync(outDir, { recursive: true, force: true });
+// Prepare the output directory without ever removing the directory itself:
+// the grader may run as an unprivileged user that can write inside the
+// pre-created output directory but cannot delete the directory itself.
 mkdirSync(outDir, { recursive: true });
+for (const known of ['game', 'screenshots', 'dossier.json']) {
+  // force: true tolerates entries that are not there yet.
+  rmSync(join(outDir, known), { recursive: true, force: true });
+}
 
 cpSync(gameDir, join(outDir, 'game'), { recursive: true });
 cpSync(shotsDir, join(outDir, 'screenshots'), { recursive: true });
