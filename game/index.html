@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twin Harbor — Spot the Difference</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #17141f;
+    color: #f5f1e6;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  header {
+    width: 1280px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 12px;
+    flex-wrap: nowrap;
+  }
+  h1 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #ffd94d;
+    white-space: nowrap;
+  }
+  .pill {
+    background: #262032;
+    border: 1px solid #4a4258;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .timer-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 180px;
+  }
+  .timer-bar-outer {
+    flex: 1;
+    height: 12px;
+    background: #2c2638;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  #hud-timer-bar {
+    height: 100%;
+    width: 100%;
+    background: #2fd95f;
+    border-radius: 999px;
+    transition: width 0.2s linear;
+  }
+  #hud-timer-text { font-weight: 700; font-size: 17px; min-width: 44px; }
+  button {
+    background: #2f6fb2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  button:hover:not(:disabled) { background: #3a83cc; }
+  button:disabled { opacity: 0.4; cursor: default; }
+  #btn-mute { background: #4a4258; }
+  canvas {
+    display: block;
+    background: #17141f;
+    border-radius: 6px;
+    max-width: 100%;
+    height: auto;
+  }
+  footer {
+    width: 1280px;
+    max-width: 100%;
+    padding: 10px 16px 16px;
+    color: #b9b3c4;
+    font-size: 14px;
+    text-align: center;
+  }
+  footer b { color: #f5f1e6; }
+</style>
+</head>
+<body>
+<header>
+  <h1>TWIN HARBOR</h1>
+  <span class="pill" id="hud-round">Round 1/3 — Dawn Harbor</span>
+  <span class="pill" id="hud-found">Found 0 / 7</span>
+  <span class="timer-wrap">
+    <span id="hud-timer-text">2:00</span>
+    <span class="timer-bar-outer"><span id="hud-timer-bar"></span></span>
+  </span>
+  <span class="pill" id="hud-score">Score 0</span>
+  <span class="pill" id="hud-hints">Hints 3</span>
+  <button id="btn-hint" type="button">Hint (H)</button>
+  <button id="btn-mute" type="button">Sound: On (M)</button>
+</header>
+<canvas id="game" width="1280" height="600"></canvas>
+<footer>
+  Click a difference on either picture to mark it — <b>correct +100, +3s</b> · wrong click <b>−5s</b> ·
+  <b>H</b> hint · <b>N</b> next · <b>R</b> retry · <b>M</b> mute · Find them all before the timer runs out!
+</footer>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
